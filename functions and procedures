@@ -1,0 +1,46 @@
+procedures
+CREATE TABLE IF NOT EXISTS Employee (
+  id INT PRIMARY KEY,
+  name VARCHAR(255),
+  department VARCHAR(255),
+  salary DECIMAL(10, 2)
+);
+INSERT INTO Employee (id, name, department, salary)
+VALUES
+  (1, 'John Doe', 'Sales', 25000.00),
+  (2, 'Jane Smith', 'IT', 30000.00),
+  (3, 'Mark Johnson', 'Finance', 18000.00),
+  (4, 'Sarah Adams', 'HR', 22000.00),
+  (5, 'Michael Brown', 'IT', 40000.00);
+DELIMITER //
+
+CREATE PROCEDURE GetHighSalaryEmployees()
+BEGIN
+  SELECT name, department, salary
+  FROM Employee
+  WHERE salary > 20000;
+END //
+
+DELIMITER ;
+CALL GetHighSalaryEmployees();
+functions:--
+DELIMITER //
+
+CREATE FUNCTION factorial_recursive(n INT)
+RETURNS INT
+BEGIN
+  DECLARE result INT;
+  
+  IF n = 0 THEN
+    SET result = 1;
+  ELSE
+    SET result = n * factorial_recursive(n - 1);
+  END IF;
+  
+  RETURN result;
+END //
+
+DELIMITER ;
+SELECT factorial_recursive(5) AS factorial;
+
+
